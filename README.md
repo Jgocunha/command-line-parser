@@ -70,10 +70,6 @@ Names should describe everything that a function, variable, or class does.
 
 If you do something a certain way, do all similar thongs in the same way.
 
-**Innapropriate static**
-
-In general, you should prefer non-static methods. When in doubt make the function non-station. If you really want a function to be static, make sure that there is no chance that you will want it to behave polymorphically.
-
 ---
 
 ### Comments
@@ -145,6 +141,10 @@ Temporal couplings are often necessary, but you should not hide them. Structure 
 **Functions should descend only one level of abstraction**
 
 The statements within a function should all be written at the same level of abstraction, which should be one level below the operation described by the name of the function.
+
+**Innapropriate static**
+
+In general, you should prefer non-static methods. When in doubt make the function non-station. If you really want a function to be static, make sure that there is no chance that you will want it to behave polymorphically.
 
 ---
 
