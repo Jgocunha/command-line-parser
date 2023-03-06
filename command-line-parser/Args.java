@@ -20,17 +20,15 @@ public class Args {
 
     private void parseSchema(String schema) throws ArgsException {
         for (String element : schema.split(","))
-            ;
-        if (element.length() > 0)
-            parseSchemaElement(element.trim());
+            if (element.length() > 0)
+                parseSchemaElement(element.trim());
     }
 
-    private void parseSchemaElement (String element) ArgsException
-    {
+    private void parseSchemaElement(String element) throws ArgsException {
         char elementId = element.charAt(0);
         String elementTail = element.substring(1);
         validateSchemaElementId(elementId);
-        if(elementTail.length() == 0)
+        if (elementTail.length() == 0)
             marshalers.put(elementId, new BooleanArgumentMarshaller());
         else if (elementTail.equals("*"))
             marshalers.put(elementId, new StringArgumentMarshaller());
@@ -53,7 +51,7 @@ public class Args {
         for (currentArgument = argsList.listIterator(); currentArgument.hasNext();) {
             String argString = currentArgument.next();
             if (argString.startsWith("-")) {
-                parseArgumentStrings(argString.substring(1));
+                parseArgumentCharacters(argString.substring(1));
             } else {
                 currentArgument.previous();
                 break;
@@ -61,7 +59,7 @@ public class Args {
         }
     }
 
-    void parseArgumentStrings(Strings argChars) throws ArgsException {
+    void parseArgumentCharacters(String argChars) throws ArgsException {
         for (int i = 0; i < argChars.length(); i++) {
             parseArgumentCharacter(argChars.charAt(i));
         }
@@ -98,11 +96,11 @@ public class Args {
         return StringArgumentMarshaller.getValue(marshalers.get(arg));
     }
 
-    public String getInt(char arg) {
+    public int getInt(char arg) {
         return IntegerArgumentMarshaller.getValue(marshalers.get(arg));
     }
 
-    public String getDouble(char arg) {
+    public double getDouble(char arg) {
         return DoubleArgumentMarshaller.getValue(marshalers.get(arg));
     }
 

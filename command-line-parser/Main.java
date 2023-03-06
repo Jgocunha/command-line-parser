@@ -5,9 +5,9 @@ public class Main {
             boolean logging = arg.getBoolean('l');
             int port = arg.getInt('p');
             String directory = arg.getString('d');
-            executeApplicaton(logging, port, directory);
+            // executeApplicaton(logging, port, directory);
         } catch (ArgsException e) {
-            System.out.printf("Argument error: %s\n", e.errorMessafe());
+            System.out.printf("Argument error: %s\n", e.errorMessage());
         }
     }
 
