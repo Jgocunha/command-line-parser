@@ -1,4 +1,7 @@
-import static com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
+package args;
+
+import static args.ArgsException.ErrorCode.*;
+import args.ArgsException;
 
 import java.rmi.AccessException;
 import java.util.Iterator;

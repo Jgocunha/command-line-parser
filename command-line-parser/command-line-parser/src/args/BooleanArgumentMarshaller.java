@@ -1,3 +1,6 @@
+package args;
+
+import static args.ArgsException.ErrorCode.*;
 import java.util.Iterator;
 
 public class BooleanArgumentMarshaller implements ArgumentMarshaller {

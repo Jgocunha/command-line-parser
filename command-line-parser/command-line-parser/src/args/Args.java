@@ -1,9 +1,7 @@
-package com.objectmentor.utilities.args;
+package args;
 
-import static com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
+import static args.ArgsException.ErrorCode.*;
 import java.util.*;
-
-import javax.lang.model.util.ElementScanner14;
 
 public class Args {
     private Map<Character, ArgumentMarshaller> marshalers;
@@ -34,12 +32,12 @@ public class Args {
             marshalers.put(elementId, new StringArgumentMarshaller());
         else if (elementTail.equals("#"))
             marshalers.put(elementId, new IntegerArgumentMarshaller());
-        else if (elementTail.equals("##"))
-            marshalers.put(elementId, new DoubleArgumentMarshaller());
-        else if (elementTail.equals("[*]"))
-            marshalers.put(elementId, new StringArrayArgumentMarshaller());
+        // else if (elementTail.equals("##"))
+        // marshalers.put(elementId, new DoubleArgumentMarshaller());
+        // else if (elementTail.equals("[*]"))
+        // marshalers.put(elementId, new StringArrayArgumentMarshaller());
         else
-            throw new ArgsException(INVALID_ARGUMENT_FORMAT, elementId, elementTail);
+            throw new ArgsException(INVALID_ARGUMENT_NAME, elementId, elementTail);
     }
 
     private void validateSchemaElementId(char elementId) throws ArgsException {
@@ -100,11 +98,11 @@ public class Args {
         return IntegerArgumentMarshaller.getValue(marshalers.get(arg));
     }
 
-    public double getDouble(char arg) {
-        return DoubleArgumentMarshaller.getValue(marshalers.get(arg));
-    }
+    // public double getDouble(char arg) {
+    // return DoubleArgumentMarshaller.getValue(marshalers.get(arg));
+    // }
 
-    public String[] getStringArray(char arg) {
-        return StringArrayArgumentMarshaller.getValue(marshalers.get(arg));
-    }
+    // public String[] getStringArray(char arg) {
+    // return StringArrayArgumentMarshaller.getValue(marshalers.get(arg));
+    // }
 }

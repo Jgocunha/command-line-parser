@@ -1,11 +1,11 @@
-import static com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
+package args;
+
+import static args.ArgsException.ErrorCode.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import ArgsException.ErrorCode;
-
-public class IntegerArgumentMarshaler implements ArgumentMarshaller {
+public class IntegerArgumentMarshaller implements ArgumentMarshaller {
     private int intValue = 0;
 
     public void set(Iterator<String> currentArgument) throws ArgsException {
@@ -22,8 +22,8 @@ public class IntegerArgumentMarshaler implements ArgumentMarshaller {
     }
 
     public static int getValue(ArgumentMarshaller am) {
-        if (am != null && am instanceof IntegerArgumentMarshaler)
-            return ((IntegerArgumentMarshaler) am).intValue;
+        if (am != null && am instanceof IntegerArgumentMarshaller)
+            return ((IntegerArgumentMarshaller) am).intValue;
         else
             return 0;
     }
