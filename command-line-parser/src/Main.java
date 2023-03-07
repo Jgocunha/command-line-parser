@@ -10,7 +10,7 @@ public class Main {
             String directory = arg.getString('d');
             System.out.printf("Boolean %b\n", logging);
             System.out.printf("Integer %d\n", port);
-            System.out.printf("Directory %s\n", directory);
+            System.out.printf("String %s\n", directory);
             // executeApplicaton(logging, port, directory);
         } catch (ArgsException e) {
             System.out.printf("Argument error: %s\n", e.errorMessage());

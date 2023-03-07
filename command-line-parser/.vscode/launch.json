@@ -6,10 +6,18 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "command-line-parser_6d2fab54",
+      "args": "${command:SpecifyProgramArgs}"
+    },
+    {
+      "type": "java",
       "name": "Current File",
       "request": "launch",
       "mainClass": "${file}",
-      "args": "${command: 1 9 ddd}"
+      "args": "${command:SpecifyProgramArgs}"
     },
     {
       "type": "java",
