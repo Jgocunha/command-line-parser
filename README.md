@@ -14,11 +14,23 @@ It retrieves information according to a certain schema that needs to be specifie
 
 ### How should the command-line arguments look like?
 
-Let's consider the following schema ```"l,p#,d*"``` (a ```boolean```, an ```int```, and a ```String``` can be interpreted).
+Let's consider the following schema ```"l,p#,d*"``` (a ```boolean```, an ```int```, and a ```String``` can be interpreted). The ```Main.java``` file runs a test that initiates an ```Args``` class with this schema and then prints the found arguments.
 
-- If you input ```l``` the program will read ```true```.
-- If you input ``` ``` the program will read ```false```.
-- TO DO
+- If you input ```-d C:/directory -p 90909 -l``` the program will output:
+  
+```
+Boolean true
+Integer 90909
+Directory C:/directory
+``` 
+- If you input ```-d C:/directory -p 90909 l``` the program will output:
+
+```
+Boolean false
+Integer 90909
+Directory C:/directory
+```
+
 
 ## How to create a Java project in VS code
 
