@@ -1,5 +1,49 @@
 # command-line-parser
-Case study of a commnad-line argument parser as seen in Clean Code Chapter 14 - Sucessive refinement. (Difference is, it is implemented in C++)
+
+Case study of a commnad-line argument parser as seen in Clean Code Chapter 14 - Sucessive refinement.
+
+## How to use
+
+The ```Args``` class receives command-line arguments and interprets them. At this point this class can interpret ```boolean```s, ```int```s, and ```String```s. But how does it do it?
+
+It retrieves information according to a certain schema that needs to be specified in the first argument of the constructor. For example:
+- ```Args arg = new Args("l,p#,d*", args);``` means that the class will be able to read a ```boolean``` (```l```), an ```int``` (```p#```), and a ```String``` (```d*```).
+- ```Args arg = new Args("l", args);``` means that the class will be able to read a ```boolean```.
+- ```Args arg = new Args("p#,d*", args);``` means that the class will be able to read an ```int``` (```p#```), and a ```String``` (```d*```).
+- And so on ...
+
+### How should the command-line arguments look like?
+
+Let's consider the following schema ```"l,p#,d*"``` (a ```boolean```, an ```int```, and a ```String``` can be interpreted).
+
+- If you input ```l``` the program will read ```true```.
+- If you input ``` ``` the program will read ```false```.
+- TO DO
+
+## How to create a Java project in VS code
+
+This will only work if you have installed Extension Pack for Java: https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack.
+
+1. Open VS code;
+2. Press the Explorer icon in the top left corner of the vertical menu tab;
+3. Press Create Java Project;
+4. (...)
+
+## How to create a ```launch.json``` file in VS code
+
+https://code.visualstudio.com/docs/java/java-debugging#_configure
+
+If you would like to customize and persist your launch configuration, you can select the create a ```launch.json``` file link in the Run and Debug view.
+
+## How to set command line arguments in VS code
+
+https://code.visualstudio.com/docs/java/java-debugging#_launch
+
+In the ```launch.json``` file you can add the following configuration to allow command-line arguments:
+
+- ```args``` - The command-line arguments passed to the program. Use ```"${command:SpecifyProgramArgs}"``` to prompt for program arguments. It accepts a string or an array of string.
+
+Now, whenever you run your script you will be prompted to specify the command-line arguments.
 
 ---
 
