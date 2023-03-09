@@ -18,7 +18,7 @@ int main(int argc, char** argv)
         args.push_back(argv[i]);
     }
     
-    Args arg("l,p#,d*", args);
+    Args arg("l,p#,d*,", args);
 
     return 0;
 }

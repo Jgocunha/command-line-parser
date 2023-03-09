@@ -4,10 +4,11 @@
 #include <iterator>
 
 class ArgumentMarshaller {
-	virtual void set(std::vector<std::string>::iterator currentArgument) = 0;
+public:
+	virtual void set(std::vector<std::string>::iterator currentArgument) {};
 };
 
-class integerArgumentMarshaller : public ArgumentMarshaller
+class IntegerArgumentMarshaller : public ArgumentMarshaller
 {
 	private:
 		int integerValue = 0;
