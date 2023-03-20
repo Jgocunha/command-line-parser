@@ -20,5 +20,9 @@ int main(int argc, char** argv)
     
     Args arg("l,p#,d*,", args);
 
+    int integer = arg.getInt('p');
+
+    cout << "Integer inserted was: " << integer << endl;
+
     return 0;
 }

@@ -5,28 +5,10 @@
 
 class ArgumentMarshaller {
 public:
-	virtual void set(std::vector<std::string>::iterator currentArgument) {};
+	virtual void set(std::vector<std::string>::iterator currentArgument) = 0;
 };
 
-class IntegerArgumentMarshaller : public ArgumentMarshaller
-{
-	private:
-		int integerValue = 0;
-
-	public:
-		void set(std::vector<std::string>::iterator currentArgument)
-		{
-			std::string parameter;
-
-			try
-			{
-				parameter = *currentArgument++;
-				integerValue = stoi(parameter);
-			}
-			catch(...)
-			{
-				std::cout << "Error integerArgumentMarshaller\n";
-			}
-		}
-
-};
+template<typename Base, typename T>
+inline bool instanceof(const T* ptr) {
+	return dynamic_cast<const Base*>(ptr) != nullptr;
+}

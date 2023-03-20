@@ -1,2 +1,4 @@
 ﻿  main.cpp
-  command-line-parser.vcxproj -> E:\Dev\command-line-parser\command-line-parser\bin\Win32\Debug\command-line-parser.exe
+E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\command-line-parser\args.h(70,22): warning C4018: '<': signed/unsigned mismatch
+E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\command-line-parser\args.h(84,22): warning C4018: '<': signed/unsigned mismatch
+  command-line-parser.vcxproj -> E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\bin\Win32\Debug\command-line-parser.exe
