@@ -5,16 +5,21 @@
 class IntegerArgumentMarshaller : public ArgumentMarshaller
 {
 private:
-	int integerValue = 0;
+	int integerValue;
 
 public:
+	IntegerArgumentMarshaller()
+	{
+		integerValue = 0;
+	}
+
 	void set(std::vector<std::string>::iterator currentArgument)
 	{
 		std::string parameter;
 
 		try
 		{
-			parameter = *currentArgument++;
+			parameter = *++currentArgument;
 			integerValue = stoi(parameter);
 		}
 		catch (...)
@@ -23,9 +28,9 @@ public:
 		}
 	}
 
-	static int getValue(IntegerArgumentMarshaller am)
+	int getValue()
 	{
-		return am.integerValue;
+		return integerValue;
 	}
 };
 

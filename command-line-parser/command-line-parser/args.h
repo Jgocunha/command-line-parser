@@ -23,14 +23,15 @@ class Args {
 	public:
 		Args(std::string schema, std::vector<std::string> args)
 		{
-			//std::unordered_map<char, ArgumentMarshaller> marshalers;
-			//argsFound
+			marshalers = {};
+			argsFound = {};
+			currentArgument = {};
 
 			parseSchema(schema);
 			parseArgumentStrings(args);
 		}
 	private:
-		void parseSchema(std::string schema)
+		void parseSchema(std::string& schema)
 		{
 			std::string delimiter = ",";
 			size_t pos = 0;
@@ -42,19 +43,17 @@ class Args {
 			}
 		}
 
-		void parseSchemaElement(std::string element)
+		void parseSchemaElement(const std::string& element)
 		{
 			char elementId = element.front();
 			std::string elementTail = element.substr(1);
 			validateSchemaElementId(elementId);
 			if (elementTail.length() == 0)
-				std::cout << "bool\n";
+				marshalers.insert(std::make_pair(elementId, std::make_shared<BooleanArgumentMarshaller>()));
 			else if (elementTail == "*")
-				std::cout << "str\n";
+				marshalers.insert(std::make_pair(elementId, std::make_shared<StringArgumentMarshaller>()));
 			else if (elementTail == "#")
-			{
-				marshalers.insert(std::pair<char, std::shared_ptr<ArgumentMarshaller>>(elementId, std::shared_ptr<IntegerArgumentMarshaller>()));
-			}
+				marshalers.insert(std::make_pair(elementId, std::make_shared<IntegerArgumentMarshaller>()));
 		}
 
 		void validateSchemaElementId(char elementId)
@@ -65,21 +64,17 @@ class Args {
 				<< "elementId is not on the alphabet." << elementId << std::endl;
 		}
 
-		void parseArgumentStrings(std::vector<std::string> args)
+		void parseArgumentStrings(std::vector<std::string>& args)
 		{
-			for (int i = 0; i < args.size(); i++)
-			{
-				std::string argString = args[i];
-				if (argString[0] == '-' )
+			for (currentArgument = args.begin(); currentArgument != args.end(); currentArgument++) {
+				std::string argString = *currentArgument;
+				if (argString.find("-") == 0) {
 					parseArgumentCharacters(argString.substr(1));
-				else
-				{
-					// to do 
 				}
 			}
 		}
 
-		void parseArgumentCharacters(std::string argChars)
+		void parseArgumentCharacters(const std::string& argChars)
 		{
 			for (int i = 0; i < argChars.size(); i++)
 				parseArgumentCharacter(argChars[i]);
@@ -88,18 +83,21 @@ class Args {
 		void parseArgumentCharacter(char argChar)
 		{
 			// to do EXCEPTION
-			try
-			{
-				std::shared_ptr<ArgumentMarshaller> m = marshalers.at(argChar);
-				argsFound.insert(argChar);
-				m->set(currentArgument);
-				// to do EXCEPTION
-			}
-			catch (const std::out_of_range& oor)
-			{
-				std::cout << "This is an exception! At parseArgumentCharacter." << std::endl
-					<< "argChar does not have an associated ArgumentMarshaller." << argChar << std::endl;
-				std::cerr << "Out of Range error: " << oor.what() << '\n';
+			auto it = marshalers.find(argChar);
+			if (it != marshalers.end()) {
+				try
+				{
+					std::shared_ptr<ArgumentMarshaller> m = marshalers.at(argChar);
+					argsFound.insert(argChar);
+					m->set(currentArgument);
+					// to do EXCEPTION
+				}
+				catch (const std::out_of_range& oor)
+				{
+					std::cout << "This is an exception! At parseArgumentCharacter." << std::endl
+						<< "argChar does not have an associated ArgumentMarshaller." << argChar << std::endl;
+					std::cerr << "Out of Range error: " << oor.what() << '\n';
+				}
 			}
 		}
 
@@ -110,26 +108,39 @@ class Args {
 			return (argsFound.find(arg) != argsFound.end());
 		}
 
-		int nextArgument()
-		{
-			//return currentArgument. to do
-		}
-
 		bool getBoolean(char arg)
 		{
-			//return BooleanArgumentMarshaller.getValue(marshalers.at(arg)); to do
-			return false;
+			auto it = marshalers.find(arg);
+			if (it != marshalers.end()) {
+				ArgumentMarshaller* am = it->second.get(); 
+				if (BooleanArgumentMarshaller* iAm = dynamic_cast<BooleanArgumentMarshaller*>(am)) { 
+					return iAm->getValue(); 
+				}
+			}
+			return false; 
 		}
 
 		std::string getString(char arg)
 		{
-			//return StringArgumentMarshaller.getValue(marshalers.at(arg)); to do
+			auto it = marshalers.find(arg);
+			if (it != marshalers.end()) { 
+				ArgumentMarshaller* am = it->second.get(); 
+				if (StringArgumentMarshaller* iAm = dynamic_cast<StringArgumentMarshaller*>(am)) {
+					return iAm->getValue(); 
+				}
+			}
 			return std::string{};
 		}
 
 		int getInt(char arg)
 		{
-			//return IntegerArgumentMarshaller.getValue(marshalers.at(arg)); to do
-			return 0;
+			auto it = marshalers.find(arg);
+			if (it != marshalers.end()) { // if argument found in the map
+				ArgumentMarshaller* am = it->second.get(); // get the ArgumentMarshaller shared pointer
+				if (IntegerArgumentMarshaller* iAm = dynamic_cast<IntegerArgumentMarshaller*>(am)) { // cast to IntegerArgumentMarshaller
+					return iAm->getValue(); // call the getIntValue method
+				}
+			}
+			return 0; // return 0 if argument not found or not of type IntegerArgumentMarshaller
 		}
 };
