@@ -31,36 +31,6 @@ Integer 90909
 Directory C:/directory
 ```
 
-
-## How to create a Java project in VS code
-
-This will only work if you have installed Extension Pack for Java: https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack.
-
-1. Open VS code;
-2. Press the Explorer icon in the top left corner of the vertical menu tab;
-3. Press Create Java Project;
-4. (...)
-
-## How to create a ```launch.json``` file in VS code
-
-https://code.visualstudio.com/docs/java/java-debugging#_configure
-
-If you would like to customize and persist your launch configuration, you can select the create a ```launch.json``` file link in the Run and Debug view.
-
-## How to set command line arguments in VS code
-
-https://code.visualstudio.com/docs/java/java-debugging#_launch
-
-In the ```launch.json``` file you can add the following configuration to allow command-line arguments:
-
-- ```args``` - The command-line arguments passed to the program. Use ```"${command:SpecifyProgramArgs}"``` to prompt for program arguments. It accepts a string or an array of string.
-
-Now, whenever you run your script you will be prompted to specify the command-line arguments.
-
----
-
-## Syntax guidelines
-
 ---
 
 ## Refactoring guidelines
