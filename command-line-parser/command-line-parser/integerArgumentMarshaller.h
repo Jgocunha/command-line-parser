@@ -1,6 +1,7 @@
 #pragma once
 
 #include "argumentMarshaller.h"
+#include "argsException.h"
 
 class IntegerArgumentMarshaller : public ArgumentMarshaller
 {
@@ -22,10 +23,14 @@ public:
 			parameter = *++currentArgument;
 			integerValue = stoi(parameter);
 		}
-		catch (...)
+		catch (ArgsException& e)
 		{
-			std::cout << "Error integerArgumentMarshaller\n";
+			throw ArgsException(MISSING_INTEGER);
 		}
+		//catch (ArgsException e)
+		//{
+		//	throw new ArgsException(INVALID_INTEGER, parameter);
+		//}
 	}
 
 	int getValue()

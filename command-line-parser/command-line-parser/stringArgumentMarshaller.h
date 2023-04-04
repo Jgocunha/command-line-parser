@@ -1,6 +1,7 @@
 #pragma once
 
 #include "argumentMarshaller.h"
+#include "argsException.h"
 
 class StringArgumentMarshaller : public ArgumentMarshaller
 {
@@ -18,9 +19,9 @@ public:
 		{
 			stringValue = *++currentArgument;
 		}
-		catch (...)
+		catch (ArgsException& e)
 		{
-			std::cout << "Error stringArgumentMarshaller\n";
+			throw ArgsException(MISSING_STRING);
 		}
 	}
 

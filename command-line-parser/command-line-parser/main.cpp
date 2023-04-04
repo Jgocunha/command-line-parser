@@ -2,11 +2,9 @@
 #include <vector>
 
 #include "args.h"
+#include "argsException.h"
 
 using namespace std;
-
-
-
 
 int main(int argc, char** argv)
 {
@@ -20,15 +18,24 @@ int main(int argc, char** argv)
         args.push_back(argv[i]);
     }
     
-    Args arg("l,p#,d*,", args);
+    try 
+    {
+        //Args arg("l,p#,d*,", args);
+        Args arg("l,p#,d*,", args);
 
-    int integer = arg.getInt('p');
-    bool boolean = arg.getBoolean('l');
-    string string = arg.getString('d');
+        int integer = arg.getInt('p');
+        bool boolean = arg.getBoolean('l');
+        string string = arg.getString('d');
 
-    cout << "Integer inserted was: " << integer << endl;
-    cout << "Boolean inserted was: " << boolean << endl;
-    cout << "String inserted was: " << string << endl;
+        cout << "Integer inserted was: " << integer << endl;
+        cout << "Boolean inserted was: " << boolean << endl;
+        cout << "String inserted was: " << string << endl;
+    }
+    catch (ArgsException& e)
+    {
+        std::cerr << "Argument error: " + e.getErrorMessage() + "\n";
+    }
+    
 
     return 0;
 }

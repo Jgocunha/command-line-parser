@@ -13,6 +13,7 @@
 #include "booleanArgumentMarshaller.h"
 #include "integerArgumentMarshaller.h"
 #include "stringArgumentMarshaller.h"
+#include "argsException.h"
 
 class Args {
 	private:
@@ -29,6 +30,7 @@ class Args {
 
 			parseSchema(schema);
 			parseArgumentStrings(args);
+			
 		}
 	private:
 		void parseSchema(std::string& schema)
@@ -54,14 +56,14 @@ class Args {
 				marshalers.insert(std::make_pair(elementId, std::make_shared<StringArgumentMarshaller>()));
 			else if (elementTail == "#")
 				marshalers.insert(std::make_pair(elementId, std::make_shared<IntegerArgumentMarshaller>()));
+			else
+				throw ArgsException(INVALID_ARGUMENT_FORMAT, elementId, elementTail);
 		}
 
 		void validateSchemaElementId(char elementId)
 		{
-			// to do EXCEPTION
 			if (!std::isalpha(elementId))
-				std::cout << "This is an exception! At validateSchemaElementId." << std::endl 
-				<< "elementId is not on the alphabet." << elementId << std::endl;
+				throw ArgsException(INVALID_ARGUMENT_NAME, elementId);
 		}
 
 		void parseArgumentStrings(std::vector<std::string>& args)
@@ -82,21 +84,20 @@ class Args {
 
 		void parseArgumentCharacter(char argChar)
 		{
-			// to do EXCEPTION
 			auto it = marshalers.find(argChar);
 			if (it != marshalers.end()) {
+				std::shared_ptr<ArgumentMarshaller> m = marshalers.at(argChar);
+				if (m == NULL)
+					throw ArgsException(UNEXPECTED_ARGUMENT, argChar);
 				try
 				{
-					std::shared_ptr<ArgumentMarshaller> m = marshalers.at(argChar);
 					argsFound.insert(argChar);
 					m->set(currentArgument);
-					// to do EXCEPTION
 				}
-				catch (const std::out_of_range& oor)
+				catch (ArgsException& e)
 				{
-					std::cout << "This is an exception! At parseArgumentCharacter." << std::endl
-						<< "argChar does not have an associated ArgumentMarshaller." << argChar << std::endl;
-					std::cerr << "Out of Range error: " << oor.what() << '\n';
+					e.setErrorArgumentId(argChar);
+					throw e;
 				}
 			}
 		}
