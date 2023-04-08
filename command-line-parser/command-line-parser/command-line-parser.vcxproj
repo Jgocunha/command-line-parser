@@ -148,13 +148,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="args.cpp" />
+    <ClCompile Include="catch_amalgamated.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="args.h" />
     <ClInclude Include="argsException.h" />
     <ClInclude Include="argumentMarshaller.h" />
     <ClInclude Include="booleanArgumentMarshaller.h" />
+    <ClInclude Include="catch_amalgamated.hpp" />
     <ClInclude Include="integerArgumentMarshaller.h" />
     <ClInclude Include="stringArgumentMarshaller.h" />
   </ItemGroup>

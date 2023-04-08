@@ -21,6 +21,12 @@
     <ClCompile Include="args.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="catch_amalgamated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="args.h">
@@ -39,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="integerArgumentMarshaller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="catch_amalgamated.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

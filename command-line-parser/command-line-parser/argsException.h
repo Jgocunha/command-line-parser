@@ -39,6 +39,7 @@ public:
 	ArgsException(const ErrorCode errorCode, const std::string& errorParameter)
 	{
 		this->errorCode = errorCode;
+		errorArgumentId = '\0';
 		this->errorParameter = errorParameter;
 		errorMessage = getErrorMessage();
 	}
@@ -87,7 +88,7 @@ public:
 			errorMessage = "TILT: Should not get here.";
 			break;
 		case UNEXPECTED_ARGUMENT:
-			errorMessage = "Argument " + std::string(1, errorArgumentId) + " unexpected.";
+			errorMessage = "Argument unexpected " + std::string(1, errorArgumentId);
 			break;
 		case MISSING_STRING:
 			errorMessage = "Could not find string parameter for " + std::string(1, errorArgumentId) + ".";

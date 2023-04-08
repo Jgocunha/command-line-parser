@@ -25,12 +25,9 @@ public:
 		}
 		catch (ArgsException& e)
 		{
-			throw ArgsException(MISSING_INTEGER);
+			// Throw ArgsException with error code INVALID_INTEGER
+			throw ArgsException(INVALID_INTEGER, parameter);
 		}
-		//catch (ArgsException e)
-		//{
-		//	throw new ArgsException(INVALID_INTEGER, parameter);
-		//}
 	}
 
 	int getValue()
