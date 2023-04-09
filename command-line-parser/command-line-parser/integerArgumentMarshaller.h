@@ -23,7 +23,7 @@ public:
 			parameter = *++currentArgument;
 			integerValue = stoi(parameter);
 		}
-		catch (ArgsException& e)
+		catch (...)
 		{
 			// Throw ArgsException with error code INVALID_INTEGER
 			throw ArgsException(INVALID_INTEGER, parameter);

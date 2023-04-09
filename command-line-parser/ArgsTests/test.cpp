@@ -115,7 +115,7 @@ TEST(IntegerArgumentMarshallerTest, TestSetValueAndGetVlaue)
     std::vector<std::string> args = { "-i", "42" };
 
     // Test set() method
-    integerArgMarshaller.set(args.begin() + 1); // Skip the flag "-i"
+    integerArgMarshaller.set(args.begin()); 
 
     // Test getValue() method
     int value = integerArgMarshaller.getValue();
@@ -125,12 +125,13 @@ TEST(IntegerArgumentMarshallerTest, TestSetValueAndGetVlaue)
 TEST(IntegerArgumentMarshallerTest, TestSetMissingIntegerValue)
 {
     IntegerArgumentMarshaller integerArgMarshaller;
-    std::vector<std::string> args = { "-i" };
+    std::vector<std::string> args = { "-i", ""};
 
     // Test set() method with missing integer value
     try
     {
-        integerArgMarshaller.set(args.begin()); // Skip the flag "-i"
+        std::vector<std::string>::iterator arg = args.begin(); 
+        integerArgMarshaller.set(arg);
     }
     catch ( ArgsException& e)
     {
@@ -151,7 +152,7 @@ TEST(IntegerArgumentMarshallerTest, TestSetInvalidIntegerValue)
     // Test set() method with invalid integer value
     try
     {
-        integerArgMarshaller.set(args.begin() + 1); // Skip the flag "-i"
+        integerArgMarshaller.set(args.begin());
     }
     catch (ArgsException& e)
     {

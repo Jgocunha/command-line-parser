@@ -1,5 +1,8 @@
-﻿  args.cpp
-  main.cpp
-E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\command-line-parser\args.h(80,22): warning C4018: '<': signed/unsigned mismatch
+﻿  main.cpp
+E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\command-line-parser\stringArgumentMarshaller.h(22,25): warning C4101: 'e': unreferenced local variable
+E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\command-line-parser\args.h(81,22): warning C4018: '<': signed/unsigned mismatch
+  tests.cpp
+E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\command-line-parser\stringArgumentMarshaller.h(22,25): warning C4101: 'e': unreferenced local variable
+E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\command-line-parser\args.h(81,22): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   command-line-parser.vcxproj -> E:\Dev\universidade-minho-phd\command-line-parser\command-line-parser\bin\Win32\Debug\command-line-parser.exe
